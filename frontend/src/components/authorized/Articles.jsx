@@ -3,14 +3,18 @@ import React, { useState } from "react";
 import { URL } from "./MainPage";
 import { BiDownvote, BiSolidDownvote, BiUpvote } from "react-icons/bi";
 import { BiSolidUpvote } from "react-icons/bi";
-function Articles({ data, getData }) {
+function Articles({ data, userId }) {
   const [votes, setVotes] = useState(data?.votes);
   const [hasUpvoted, setHasUpvoted] = useState(data?.hasUpvoted);
   const [hasDownvoted, setHasDownvoted] = useState(data?.hasDownvoted);
 
   const handleVote = async (articleUrl, voteType) => {
     await axios
-      .post(URL + "/article/vote", { url: articleUrl, voteType })
+      .post(URL + "/article/vote", {
+        url: articleUrl,
+        voteType,
+        sessionId: userId,
+      })
       .then((val) => {
         console.log(val);
         if (val?.data?.success) {
@@ -30,7 +34,11 @@ function Articles({ data, getData }) {
   };
   const handleVoteRedo = async (articleUrl, voteType) => {
     await axios
-      .post(URL + "/article/redoVote", { url: articleUrl, voteType })
+      .post(URL + "/article/redoVote", {
+        url: articleUrl,
+        voteType,
+        sessionId: userId,
+      })
       .then((val) => {
         console.log(val);
         if (val?.data?.success) {
