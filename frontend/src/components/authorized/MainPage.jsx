@@ -4,7 +4,7 @@ import Articles from "./Articles";
 import axios from "axios";
 import Skeleton from "./Skeleton";
 
-export const URL = "http://localhost:8000";
+export const URL = "https://newsa-uqaw.onrender.com";
 function MainPage() {
   const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState([]);
