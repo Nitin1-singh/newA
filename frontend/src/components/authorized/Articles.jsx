@@ -54,38 +54,52 @@ function Articles({ data, userId }) {
   return (
     <div className="flex mt-5 flex-col gap-3 border-[0.5px] border-slate-400 rounded-md h-100 w-[600px] p-6">
       {data?.title}
-      <div className="flex flex-col items-center w-[30px]">
+      <div className="flex flex-col items-start justify-end w-[150px]">
         {hasUpvoted ? (
-          <BiSolidUpvote
-            className="text-black hover:cursor-pointer"
-            size={30}
-            onClick={() => handleVoteRedo(data?.url, "upvote")}
-          />
+          <div className="flex">
+            <BiSolidUpvote
+              className="text-black hover:cursor-pointer"
+              size={30}
+              onClick={() => handleVoteRedo(data?.url, "upvote")}
+            />
+            <p>{votes?.upvotes} Upvotes</p>
+          </div>
         ) : (
-          <BiUpvote
-            // fill="red"
-            className="text-black hover:cursor-pointer"
-            size={30}
-            onClick={() => handleVote(data?.url, "upvote")}
-          >
-            Upvote
-          </BiUpvote>
+          <div className="flex">
+            <BiUpvote
+              // fill="red"
+              className="text-black hover:cursor-pointer"
+              size={30}
+              onClick={() => handleVote(data?.url, "upvote")}
+            >
+              Upvote
+            </BiUpvote>
+            <p>{votes?.upvotes} Upvotes</p>
+          </div>
         )}
-        <p>{votes?.upvotes - votes?.downvotes}</p>
+        <p className="ms-3 w-100 justify-end items-end">
+          {votes?.upvotes - votes?.downvotes}
+        </p>
         {hasDownvoted ? (
-          <BiSolidDownvote
-            className="text-black hover:cursor-pointer"
-            size={30}
-            onClick={() => handleVoteRedo(data?.url, "downvote")}
-          />
+          <div className="flex">
+            <BiSolidDownvote
+              className="text-black hover:cursor-pointer"
+              size={30}
+              onClick={() => handleVoteRedo(data?.url, "downvote")}
+            />
+            <p>{votes?.downvotes} Down Votes</p>
+          </div>
         ) : (
-          <BiDownvote
-            className="text-black hover:cursor-pointer"
-            size={30}
-            onClick={() => handleVote(data?.url, "downvote")}
-          >
-            Downvote
-          </BiDownvote>
+          <div className="flex">
+            <BiDownvote
+              className="text-black hover:cursor-pointer"
+              size={30}
+              onClick={() => handleVote(data?.url, "downvote")}
+            >
+              Downvote
+            </BiDownvote>
+            <p>{votes?.downvotes} Down Votes</p>
+          </div>
         )}
       </div>
       <img
